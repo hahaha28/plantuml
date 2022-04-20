@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+MediaControllerModule -> MediaControllerHelper: editImage()
+MediaControllerHelper ->MediaControllerHelper: editImage()
+MediaControllerHelper -> MediaControllerProxyActivity: startActivity()
+MediaControllerProxyActivity -> MediaControllerProxyActivity: handleAction (ACTION_EDIT_IMAGE)
+MediaControllerProxyActivity -> MediaControllerProxyActivity: startImageEditor()
+MediaControllerProxyActivity -> ImageEditorActivity_: startActivityForResult()
+@enduml

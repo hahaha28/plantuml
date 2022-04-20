@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+PhoneNumberProvider -> PhoneUtil:formatPhoneNumber()
+PhoneUtil ->PhoneUtil:formatPhoneNow()
+PhoneUtil -> PhoneUtil:formatPhoneAsYouType()
+PhoneUtil -> PhoneUtil: formatPhoneAsYouTypeInternal()
+PhoneUtil -> PhoneUtil: formatPhoneBySimCardRegion()
+PhoneUtil -> PhoneUtil: tryFormatPhoneLocal(maybePhoneNo: String,regionCode(CN,US): String?)
+@enduml

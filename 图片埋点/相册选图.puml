@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+ImagePickerModule -> ImagePickerHelper: pickImage()
+ImagePickerHelper -> ReactPhotoProxyActivity_ : pickImage(ImagePickerData data)
+ReactPhotoProxyActivity_ -> PhotoProxyActivity_:startActivityForResult()
+PhotoProxyActivity_ -> PhotoProxyActivity_: startAction()
+PhotoProxyActivity_ -> PhotoProxyActivity_ : gotoAlbum()
+PhotoProxyActivity_ -> PhotoProxyActivity_ : gotoGallery()
+PhotoProxyActivity_ -> GalleryActivity_ : startActivityForResult()
+
+
+@enduml
