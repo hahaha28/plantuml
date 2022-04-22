@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:启动ProxyActivity;
+if(common包已加载)then(true)
+    :创建并setContent View容器;
+    :加载plugin包;
+    :开始加载页面;
+    :JS层;
+    :C层;
+    :UIManagerModule 创建View（虚拟dom）;
+    :UIViewOperationQueue 记录真实dom要进行的操作;
+    :NativeViewHierachyManager 真实dom操作;
+
+else (false)
+:false;
+endif
+:new page;
+
+
+stop
+
+@enduml

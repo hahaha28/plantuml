@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+BaseReactActivity -> BaseReactActivity:onCreate()
+BaseReactActivity -> BaseReactActivity:loadBundleAndShow()
+BaseReactActivity -> BaseReactActivity:setContentView(mContainer)
+BaseReactActivity -> ReactRootView:startReactApplication()
+ReactRootView -> ReactInstanceManager:startReactApplication()
+ReactInstanceManager -> ReactInstanceManager:createReactContextInBackground()
+ReactInstanceManager -> ReactInstanceManager:recreateReactContextInBackgroundInner()
+ReactInstanceManager -> ReactInstanceManager:recreateReactContextInBackgroundFromBundleLoader()
+ReactInstanceManager -> ReactInstanceManager:recreateReactContextInBackground()
+ReactInstanceManager -> ReactInstanceManager:runCreateReactContextOnNewThread()
+note right:开线程创建ReactContext
+
+ReactInstanceManager -> ReactRootView: 主线程继续
+
+ReactInstanceManager -> ReactInstanceManager:createReactContext(jsExecutor,jsBundleLoader)
+note right:创建ReactContext
+ReactInstanceManager -> ReactInstanceManager:setupReactContext(reactContext)
+note right:ReactContext创建完成
+
+ReactRootView -> ReactInstanceManager:attachToReactInstanceManager()
+ReactInstanceManager -> ReactInstanceManager:attachRootView()
+ReactInstanceManager -> ReactRootView:attachRootViewToInstance()
+ReactRootView -> AppRegistry:runApplication()
+
+AppRegistry -> JS层:runApplication(jsAppModuleName, appParams)
+note right: 启动第一个rn界面
+
+JS层 -> C层
+C层 -> UIManagerModule
+UIManagerModule -> UIImplementation: createView()
+UIManagerModule -> UIImplementation: updateView()
+UIManagerModule -> UIImplementation: xxx()
+UIImplementation -> NativeViewHierarchyOptimizer: handleCreateView()
+NativeViewHierarchyOptimizer -> UIViewOperationQueue: handleCreateView()
+UIViewOperationQueue -> UIViewOperationQueue: enqueueCreateView()
+UIViewOperationQueue -> NativeViewHierarchyManager:dispatchViewUpdates
+NativeViewHierarchyManager -> ViewManager:createView()
+ViewManager -> ViewManager:createView()
+
+
+
+@enduml
